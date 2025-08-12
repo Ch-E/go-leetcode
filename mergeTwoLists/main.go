@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	// list1: 1 -> 3 -> 5
-	list1 := &ListNode{Val: 1, Next: &ListNode{Val: 3, Next: &ListNode{Val: 5}}}
+	list1 := &ListNode{Val: 3, Next: &ListNode{Val: 3, Next: &ListNode{Val: 5}}}
 	// list2: 2 -> 4 -> 6 -> 8
 	list2 := &ListNode{Val: 2, Next: &ListNode{Val: 4, Next: &ListNode{Val: 6, Next: &ListNode{Val: 8}}}}
 
@@ -24,26 +24,26 @@ Return the head of the merged linked list.
 */
 
 func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
-	head := &ListNode{}
-	tail := head
+	dummy := &ListNode{}
+	curr := dummy
 
 	for list1 != nil && list2 != nil {
 		if list1.Val < list2.Val {
-			tail.Next = list1
+			curr.Next = list1
 			list1 = list1.Next
 		} else {
-			tail.Next = list2
+			curr.Next = list2
 			list2 = list2.Next
 		}
 
-		tail = tail.Next
+		curr = curr.Next
 	}
 
 	if list1 != nil {
-		tail.Next = list1
+		curr.Next = list1
 	} else {
-		tail.Next = list2
+		curr.Next = list2
 	}
 
-	return head.Next
+	return dummy.Next
 }
