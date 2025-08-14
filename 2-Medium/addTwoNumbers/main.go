@@ -2,9 +2,6 @@ package main
 
 import (
 	"fmt"
-	"slices"
-	"strconv"
-	"strings"
 )
 
 func main() {
@@ -27,6 +24,38 @@ The digits are stored in reverse order, and each of their nodes contains a singl
 Add the two numbers and return the sum as a linked list.
 */
 
+// Optimized solution
+func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+	head := &ListNode{}
+	sumList := head
+	carry := 0
+
+	for l1 != nil || l2 != nil || carry != 0 {
+		sum := 0
+
+		val1 := 0
+		if l1 != nil {
+			val1 = l1.Val
+			l1 = l1.Next
+		}
+
+		val2 := 0
+		if l2 != nil {
+			val2 = l2.Val
+			l2 = l2.Next
+		}
+
+		sum = val1 + val2 + carry
+		carry = sum / 10
+		sumList.Next = &ListNode{Val: sum % 10}
+		sumList = sumList.Next
+	}
+
+	return head.Next
+}
+
+// Brute force attempt using multiple conversions
+/*
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	head := &ListNode{}
 	sum := head
@@ -79,7 +108,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
 	return head
 }
-
+*/
 func printList(head *ListNode) {
 	for head != nil {
 		fmt.Printf("%d ", head.Val)
