@@ -29,6 +29,10 @@ func myAtoi(s string) int {
 	s = strings.TrimSpace(s)
 	isNegative := false
 
+	if len(s) == 0 {
+		return 0
+	}
+
 	switch s[0] {
 	case '-':
 		isNegative = true
