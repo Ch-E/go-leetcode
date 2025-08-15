@@ -2,13 +2,12 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
 	"unicode"
 )
 
 func main() {
-	s := "-91283472332"
+	s := "  -322yolo"
 	fmt.Print(myAtoi(s))
 }
 
@@ -25,6 +24,45 @@ The algorithm for myAtoi(string s) is as follows:
 Return the integer as the final result.
 */
 
+// Optimized solution
+func myAtoi(s string) int {
+	s = strings.TrimSpace(s)
+	isNegative := false
+
+	switch s[0] {
+	case '-':
+		isNegative = true
+		s = s[1:]
+	case '+':
+		s = s[1:]
+	}
+
+	var num int
+
+	for i, v := range s {
+		if !unicode.IsDigit(v) {
+			break
+		}
+
+		num = num*10 + int(s[i]-'0')
+
+		if num > 2147483647 && !isNegative {
+			return 2147483647
+		}
+
+		if -num < -2147483648 && isNegative {
+			return -2147483648
+		}
+	}
+
+	if isNegative {
+		return -num
+	}
+
+	return num
+}
+
+/*
 func myAtoi(s string) int {
 	isNegative := false
 	var strBuilder strings.Builder
@@ -63,7 +101,6 @@ func myAtoi(s string) int {
 	numStr := strBuilder.String()
 	num64, err := strconv.ParseInt(numStr, 10, 64)
 	if err != nil {
-		// If overflow, clamp to limits
 		if isNegative {
 			return -2147483648
 		}
@@ -88,3 +125,4 @@ func myAtoi(s string) int {
 
 	return int(num64)
 }
+*/
