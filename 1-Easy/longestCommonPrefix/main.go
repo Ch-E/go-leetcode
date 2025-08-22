@@ -14,14 +14,13 @@ func longestCommonPrefix(strs []string) string {
 	firstWord := strs[0]
 
 	for i := 0; i < len(firstWord); i++ {
-		letter := firstWord[i]
 		for j := 1; j < len(strs); j++ {
-			if i >= len(strs[j]) || strs[j][i] != letter {
+			if i >= len(strs[j]) || firstWord[i] != strs[j][i] {
 				return string(prefix)
 			}
 		}
 
-		prefix = append(prefix, letter)
+		prefix = append(prefix, firstWord[i])
 	}
 
 	return string(prefix)
