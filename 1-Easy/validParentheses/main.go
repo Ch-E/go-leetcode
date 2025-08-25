@@ -1,11 +1,10 @@
+// https://leetcode.com/problems/valid-parentheses/description/
 package main
 
 import "fmt"
 
 func main() {
-	s := "()[]{}"
-	// "([)]"
-	// "([]){}"
+	s := "([]){}"
 	fmt.Println(isValid(s))
 }
 
