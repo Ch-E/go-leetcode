@@ -28,10 +28,8 @@ func findSubstring(s string, words []string) []int {
 	wordIndex := []int{}
 
 	for i := 0; i < len(concatWord); i++ {
-		// foobar
 		word := concatWord[i]
 		for j := 0; j <= len(s)-len(word); j++ {
-			// s[9, 14]
 			if s[j:j+len(word)] == word {
 				wordIndex = append(wordIndex, j)
 			}
@@ -48,7 +46,7 @@ func findSubstring(s string, words []string) []int {
 		result = append(result, idx)
 	}
 
-	return wordIndex
+	return result
 }
 
 func generatePermutations(words []string) [][]string {
