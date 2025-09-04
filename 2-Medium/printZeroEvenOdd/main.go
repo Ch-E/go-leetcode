@@ -23,23 +23,48 @@ package main
 import "fmt"
 
 type ZeroEvenOdd struct {
-	n int
+	n      int
+	chZero chan struct{}
+	chEven chan struct{}
+	chOdd  chan struct{}
 }
 
 func Constructor(n int) ZeroEvenOdd {
-	return ZeroEvenOdd{n}
+	return ZeroEvenOdd{
+		n:      n,
+		chZero: make(chan struct{}, 1),
+		chEven: make(chan struct{}, 1),
+		chOdd:  make(chan struct{}, 1),
+	}
 }
 
 func (z *ZeroEvenOdd) Zero(printNumber func(int)) {
-	// TODO: implement
+	for i := 1; i <= z.n; i++ {
+		<-z.chZero
+		printNumber(0)
+		if i%2 == 1 {
+			z.chOdd <- struct{}{}
+		} else {
+			z.chEven <- struct{}{}
+		}
+	}
 }
 
 func (z *ZeroEvenOdd) Even(printNumber func(int)) {
-	// TODO: implement
+
+	for i := 2; i <= z.n; i += 2 {
+		<-z.chEven
+		printNumber(i)
+		z.chZero <- struct{}{}
+	}
 }
 
 func (z *ZeroEvenOdd) Odd(printNumber func(int)) {
-	// TODO: implement
+	for i := 1; i <= z.n; i += 2 {
+		<-z.chOdd
+		printNumber(i)
+		z.chZero <- struct{}{}
+	}
 }
 
 func main() {
@@ -48,6 +73,7 @@ func main() {
 	}
 
 	obj := Constructor(5)
+	obj.chZero <- struct{}{}
 	go obj.Zero(printNumber)
 	go obj.Even(printNumber)
 	go obj.Odd(printNumber)
