@@ -15,16 +15,17 @@ func sortColors(nums []int) {
 	colorCount := []int{0, 0, 0}
 
 	for _, v := range nums {
-		if v == 0 {
+		switch v {
+		case 0:
 			colorCount[0]++
-		} else if v == 1 {
+		case 1:
 			colorCount[1]++
-		} else {
+		default:
 			colorCount[2]++
 		}
 	}
 
-	for i := 0; i < len(nums); i++ {
+	for i := range nums {
 		if colorCount[0] > 0 {
 			nums[i] = 0
 			colorCount[0]--
