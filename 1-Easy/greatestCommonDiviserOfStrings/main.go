@@ -26,3 +26,24 @@ func gcdOfStrings(str1 string, str2 string) string {
 
 	return str1[:a]
 }
+
+/*
+func gcdOfStrings(str1 string, str2 string) string {
+    if str1 + str2 != str2 + str1{
+        return ""
+    }else{
+        var minLen int
+        if len(str1) <= len(str2){
+            minLen = len(str1)
+        }else{
+            minLen = len(str2)
+        }
+        for i := minLen; i > 0; i--{
+            if (len(str1) % i == 0) && (len(str2) % i == 0){
+                return str1[:i]
+            }
+        }
+    }
+    return ""
+}
+*/
