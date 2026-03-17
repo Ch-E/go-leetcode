@@ -24,11 +24,11 @@ Note that multiple kids can have the greatest number of candies.
 func kidsWithCandies(candies []int, extraCandies int) []bool {
 	result := make([]bool, 0)
 
-	for i := 0; i < len(candies); i++ {
+	for i := range candies {
 		isGreatest := true
 		sumCandies := candies[i] + extraCandies
 
-		for j := 0; j < len(candies); j++ {
+		for j := range candies {
 			if sumCandies < candies[j] {
 				isGreatest = false
 				break
