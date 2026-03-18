@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	flowerbed := []int{1, 0, 0, 0, 1}
+	flowerbed := []int{0, 0, 1, 0, 1}
 	n := 1
 
 	fmt.Println(canPlaceFlowers(flowerbed, n))
@@ -17,5 +17,18 @@ and an integer n, return true if n new flowers can be planted in the flowerbed
 without violating the no-adjacent-flowers rule and false otherwise.
 */
 func canPlaceFlowers(flowerbed []int, n int) bool {
+	if n > 0 {
+		for i, v := range flowerbed {
+			if v == 0 && flowerbed[i-1] == 0 && flowerbed[i+1] == 0 {
+				flowerbed[i] = 1
+				n--
+			}
+		}
+	}
 
+	if n > 0 {
+		return false
+	}
+
+	return true
 }
