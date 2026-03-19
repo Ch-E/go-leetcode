@@ -46,3 +46,25 @@ func canPlaceFlowers(flowerbed []int, n int) bool {
 
 	return true
 }
+
+/*
+func canPlaceFlowers(flowerbed []int, n int) bool {
+	if n == 0 {
+		return true
+	}
+
+	count := 0
+
+	for i := range len(flowerbed) {
+		if flowerbed[i] == 0 && flowerbed[max(i-1, 0)] == 0 && flowerbed[min(len(flowerbed)-1, i+1)] == 0 {
+			flowerbed[i] = 1
+			count++
+		}
+		if count == n {
+			return true
+		}
+	}
+
+	return false
+}
+*/
