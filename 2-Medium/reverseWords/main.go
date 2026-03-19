@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	s := "the sky is blue"
@@ -17,5 +20,15 @@ Note that s may contain leading or trailing spaces or multiple spaces between tw
 The returned string should only have a single space separating the words. Do not include any extra spaces.
 */
 func reverseWords(s string) string {
+	s = strings.TrimSpace(s)
+	fields := strings.Fields(s)
 
+	j := len(fields) - 1
+
+	for i := 0; i < len(fields)/2; i++ {
+		fields[i], fields[j] = fields[j], fields[i]
+		j--
+	}
+
+	return strings.Join(fields, " ")
 }
