@@ -17,10 +17,24 @@ and an integer n, return true if n new flowers can be planted in the flowerbed
 without violating the no-adjacent-flowers rule and false otherwise.
 */
 func canPlaceFlowers(flowerbed []int, n int) bool {
+	if n == 1 && len(flowerbed) == 1 && flowerbed[0] == 0 {
+		return true
+	}
+	if n == 1 && len(flowerbed) == 2 && flowerbed[0] == 0 && flowerbed[1] == 0 {
+		return true
+	}
 	if n > 0 {
-		for i, v := range flowerbed {
-			if v == 0 && flowerbed[i-1] == 0 && flowerbed[i+1] == 0 {
+		for i := 1; i < len(flowerbed)-1; i++ {
+			if len(flowerbed) > 1 && flowerbed[0] == 0 && flowerbed[1] == 0 {
+				flowerbed[0] = 1
+				n--
+			}
+			if flowerbed[i] == 0 && flowerbed[i-1] == 0 && flowerbed[i+1] == 0 {
 				flowerbed[i] = 1
+				n--
+			}
+			if flowerbed[len(flowerbed)-1] == 0 && flowerbed[len(flowerbed)-2] == 0 {
+				flowerbed[len(flowerbed)-1] = 1
 				n--
 			}
 		}
