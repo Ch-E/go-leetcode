@@ -1,9 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func main() {
-	nums := []int{1, 2, 3, 4, 5}
+	nums := []int{0, 4, 2, 1, 0, -1, -3}
 	fmt.Println(increasingTriplet(nums))
 }
 
@@ -16,35 +19,18 @@ func increasingTriplet(nums []int) bool {
 		return false
 	}
 
-	small := nums[0]
-	medium := nums[1]
-	large := nums[2]
+	small := math.MaxInt64
+	medium := math.MaxInt64
 
-	for i := 1; i < len(nums); i++ {
-		if small >= nums[i] {
+	for i := range nums {
+		if nums[i] <= small {
 			small = nums[i]
-		} else if medium >= nums[i] {
+		} else if nums[i] <= medium {
 			medium = nums[i]
 		} else {
-			large = nums[i]
+			return true
 		}
 	}
-
-	if small < medium && medium < large {
-		return true
-	}
-
-	/*
-		for i := 0; i < len(nums); i++ {
-			for j := 0; j < len(nums); j++ {
-				for k := 0; k < len(nums); k++ {
-					if i < j && j < k && nums[i] < nums[j] && nums[j] < nums[k] {
-						return true
-					}
-				}
-			}
-		}
-	*/
 
 	return false
 }
