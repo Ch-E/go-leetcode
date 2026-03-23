@@ -21,28 +21,30 @@ After you are done modifying the input array, return the new length of the array
 You must write an algorithm that uses only constant extra space.
 Note: The characters in the array beyond the returned length do not matter and should be ignored.
 */
-func compress(chars []byte) string {
-	counter := 1
-	compressed := ""
+func compress(chars []byte) int {
+	readIndex, writeIndex := 0, 0
+	for readIndex < len(chars) {
+		currentChar := chars[readIndex]
+		currentCount := 0
 
-	for i := 0; i < len(chars); i++ {
-		for j := i + 1; j < len(chars); j++ {
-			if chars[i] == chars[j] {
-				counter++
-			} else {
-				break
+		// Count the number of consecutive repeating characters
+		for readIndex < len(chars) && currentChar == chars[readIndex] {
+			readIndex++
+			currentCount++
+		}
+
+		// Write the compression result to chars
+		chars[writeIndex] = currentChar
+		writeIndex++
+
+		if currentCount > 1 {
+			count := strconv.Itoa(currentCount)
+			for _, i := range count {
+				chars[writeIndex] = byte(i)
+				writeIndex++
 			}
 		}
-
-		if counter == 1 {
-			compressed += string(chars[i])
-		} else {
-			compressed += string(chars[i]) + strconv.Itoa(counter)
-		}
-
-		i += counter - 1
-		counter = 1
 	}
 
-	return compressed
+	return writeIndex
 }
