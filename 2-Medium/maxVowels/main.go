@@ -14,5 +14,26 @@ Given a string s and an integer k, return the maximum number of vowel letters in
 Vowel letters in English are 'a', 'e', 'i', 'o', and 'u'.
 */
 func maxVowels(s string, k int) int {
+	left, right := 0, 0
+	result := 0
+	vowel := "aeiou"
 
+	for right < len(s) {
+		vowelCount := 0
+		window := right - left + 1
+
+		if window == k {
+			// Check for vowels
+
+			left++
+		}
+
+		if result < vowelCount {
+			result = vowelCount
+		}
+
+		right++
+	}
+
+	return result
 }
