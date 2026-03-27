@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	s := "abciiidef"
@@ -17,19 +20,25 @@ func maxVowels(s string, k int) int {
 	left, right := 0, 0
 	result := 0
 	vowel := "aeiou"
+	vowelCount := 0
 
 	for right < len(s) {
-		vowelCount := 0
 		window := right - left + 1
 
-		if window == k {
-			// Check for vowels
-
-			left++
+		if strings.IndexByte(vowel, s[right]) != -1 {
+			vowelCount++
 		}
 
-		if result < vowelCount {
-			result = vowelCount
+		if window == k {
+			if result < vowelCount {
+				result = vowelCount
+			}
+
+			if strings.IndexByte(vowel, s[left]) != -1 {
+				vowelCount--
+			}
+
+			left++
 		}
 
 		right++
