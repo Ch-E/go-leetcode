@@ -1,7 +1,10 @@
 package main
 
-func main() {
+import "fmt"
 
+func main() {
+	nums := []int{1, 1, 0, 1}
+	fmt.Println(longestSubarray(nums))
 }
 
 /*
@@ -27,5 +30,5 @@ func longestSubarray(nums []int) int {
 		}
 	}
 
-	return right - left
+	return right - left - 1
 }
