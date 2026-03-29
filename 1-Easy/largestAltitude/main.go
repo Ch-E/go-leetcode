@@ -16,5 +16,15 @@ between points i​​​​​​ and i + 1 for all (0 <= i < n).
 Return the highest altitude of a point.
 */
 func largestAltitude(gain []int) int {
+	result := 0
+	altitude := 0
 
+	for i := range gain {
+		altitude += gain[i]
+		if result < altitude {
+			result = altitude
+		}
+	}
+
+	return result
 }
