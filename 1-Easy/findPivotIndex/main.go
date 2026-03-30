@@ -1,7 +1,10 @@
 package main
 
-func main() {
+import "fmt"
 
+func main() {
+	nums := []int{1, 7, 3, 6, 5, 6}
+	fmt.Println(pivotIndex(nums))
 }
 
 /*
@@ -13,5 +16,12 @@ elements to the left. This also applies to the right edge of the array.
 Return the leftmost pivot index. If no such index exists, return -1.
 */
 func pivotIndex(nums []int) int {
+	i := 0
+	j := len(nums) - 1
+	sumLeft := 0
+	sumRight := 0
 
+	for i < j {
+
+	}
 }
