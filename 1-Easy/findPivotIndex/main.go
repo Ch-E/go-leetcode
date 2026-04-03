@@ -16,12 +16,24 @@ elements to the left. This also applies to the right edge of the array.
 Return the leftmost pivot index. If no such index exists, return -1.
 */
 func pivotIndex(nums []int) int {
-	i := 0
-	j := len(nums) - 1
-	sumLeft := 0
-	sumRight := 0
+	left := 0
+	right := 0
 
-	for i < j {
-
+	for i := 1; i < len(nums); i++ {
+		right += nums[i]
 	}
+
+	if left == right {
+		return 0
+	}
+
+	for i := 1; i < len(nums); i++ {
+		left += nums[i-1]
+		right -= nums[i]
+		if left == right {
+			return i
+		}
+	}
+
+	return -1
 }
